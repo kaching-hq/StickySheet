@@ -1,8 +1,8 @@
 Pod::Spec.new do |spec|
-  spec.name          = "BetterSheet"
+  spec.name          = "StickySheet"
   spec.version       = "1.0.0"
   spec.author        = { "Peter Verhage" => "peter@egeniq.com" }
-  spec.homepage      = "https://github.com/egeniq/BetterSheet"
+  spec.homepage      = "https://github.com/egeniq/StickySheet"
   spec.license       = { :type => "MIT", :file => "LICENSE" }
   spec.summary       = "A powerful SwiftUI sheet replacement."
   spec.description   = <<-DESC
@@ -13,6 +13,6 @@ Pod::Spec.new do |spec|
   spec.swift_version         = '5.1'
   spec.ios.deployment_target = '13.0'
   
-  spec.source        = { :git => "https://github.com/egeniq/BetterSheet.git", :tag => "#{spec.version}" }
+  spec.source        = { :git => "https://github.com/egeniq/StickySheet.git", :tag => "#{spec.version}" }
   spec.source_files  = "Sources", "Sources/**/*.swift"
 end

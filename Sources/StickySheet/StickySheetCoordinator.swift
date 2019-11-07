@@ -1,6 +1,6 @@
 //
-//  BetterSheetCoordinator.swift
-//  BetterSheet
+//  StickySheetCoordinator.swift
+//  StickySheet
 //
 //  Created by Peter Verhage on 02/08/2019.
 //  Copyright © 2019 Peter Verhage. All rights reserved.
@@ -8,11 +8,11 @@
 
 import SwiftUI
 
-internal class BetterSheetCoordinator: NSObject, UIAdaptivePresentationControllerDelegate {
-    private var sheet: BetterSheet?
-    private weak var presentingCoordinator: BetterSheetCoordinator?
+internal class StickySheetCoordinator: NSObject, UIAdaptivePresentationControllerDelegate {
+    private var sheet: StickySheet?
+    private weak var presentingCoordinator: StickySheetCoordinator?
     
-    internal var onDidAttemptToDismiss: [BetterSheetDidAttemptToDismissCallback] = []
+    internal var onDidAttemptToDismiss: [StickySheetDidAttemptToDismissCallback] = []
 
     internal weak var viewController: UIViewController? {
         didSet {
@@ -20,14 +20,14 @@ internal class BetterSheetCoordinator: NSObject, UIAdaptivePresentationControlle
         }
     }
     
-    var presentedCoordinator: BetterSheetCoordinator?
+    var presentedCoordinator: StickySheetCoordinator?
     
-    init(sheet: BetterSheet? = nil, presentingCoordinator: BetterSheetCoordinator? = nil) {
+    init(sheet: StickySheet? = nil, presentingCoordinator: StickySheetCoordinator? = nil) {
         self.sheet = sheet
         self.presentingCoordinator = presentingCoordinator
     }
     
-    func present(sheet: BetterSheet) {
+    func present(sheet: StickySheet) {
         if let presentedSheet = presentedCoordinator?.sheet {
             if presentedSheet.shouldDismiss() {
                 presentedCoordinator?.dismiss()
@@ -36,10 +36,10 @@ internal class BetterSheetCoordinator: NSObject, UIAdaptivePresentationControlle
             }
         }
         
-        let coordinator = BetterSheetCoordinator(sheet: sheet, presentingCoordinator: self)
+        let coordinator = StickySheetCoordinator(sheet: sheet, presentingCoordinator: self)
         
         let rootView =
-            BetterSheetSupport(coordinator: coordinator) {
+            StickySheetSupport(coordinator: coordinator) {
                 sheet.content()
             }
         

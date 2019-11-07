@@ -1,6 +1,6 @@
 //
-//  BetterSheetIsModalInPresentation.swift
-//  BetterSheet
+//  StickySheetIsModalInPresentation.swift
+//  StickySheet
 //
 //  Created by Peter Verhage on 02/08/2019.
 //  Copyright © 2019 Peter Verhage. All rights reserved.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-internal struct BetterSheetIsModalInPresentationPreferenceKey: PreferenceKey {
+internal struct StickySheetIsModalInPresentationPreferenceKey: PreferenceKey {
     typealias Value = Bool?
     
     static var defaultValue: Value = nil
@@ -19,7 +19,7 @@ internal struct BetterSheetIsModalInPresentationPreferenceKey: PreferenceKey {
 }
 
 public extension View {
-    func betterSheetIsModalInPresentation(_ value: Bool) -> some View {
-        return preference(key: BetterSheetIsModalInPresentationPreferenceKey.self, value: value)
+    func stickySheetIsModalInPresentation(_ value: Bool) -> some View {
+        return preference(key: StickySheetIsModalInPresentationPreferenceKey.self, value: value)
     }
 }

@@ -1,7 +1,7 @@
 import XCTest
-@testable import BetterSheet
+@testable import StickySheet
 
-final class BetterSheetTests: XCTestCase {
+final class StickySheetTests: XCTestCase {
     func testDummy() {
     }
 

@@ -1,4 +1,4 @@
-# BetterSheet
+# StickySheet
 
 Provides a powerful SwiftUI sheet replacement with the following features:
 * All the features of the built-in `sheet` modifiers, but more robust (tested against Xcode 11.0 beta 6).
@@ -10,15 +10,15 @@ support as well before the final version of iOS 13.0 is released, so this librar
 
 ## Basic Usage
 
-First make sure you import the `BetterSheet` package and  initialize `UIHostingController` with power 
+First make sure you import the `StickySheet` package and  initialize `UIHostingController` with power 
 sheet support in  `SceneDelegate.swift`:
 
 ```
-window.rootViewController = UIHostingController.withBetterSheetSupport(rootView: ContentView())
+window.rootViewController = UIHostingController.withStickySheetSupport(rootView: ContentView())
 ```
 
 The basic API for presenting a sheet is similar to SwiftUI's [`sheet(isPresented:onDismiss:content:)`](https://developer.apple.com/documentation/swiftui/view/3352791-sheet)
-view modifier. But instead of using `sheet` you use `betterSheet`.
+view modifier. But instead of using `sheet` you use `stickySheet`.
 
 For example:
 
@@ -32,7 +32,7 @@ struct ContentView: View {
                 Text("Show Detail")
             }
         }
-            .betterSheet(isPresented: $showDetail) {
+            .stickySheet(isPresented: $showDetail) {
                 Text("Detail!")
             }
     }
@@ -63,7 +63,7 @@ struct ContentView: View {
                 Text(fruit.name)
             }
         }
-            .betterSheet(item: $selectedFruit) { fruit in
+            .stickySheet(item: $selectedFruit) { fruit in
                 Text("You selected \(fruit.name)")
             }
     }
@@ -71,14 +71,14 @@ struct ContentView: View {
 ```
 
 Just as with the SwiftUI `sheet` modifier there is an environment value similar to SwiftUI's  [`presentationMode`](https://developer.apple.com/documentation/swiftui/environmentvalues/3363874-presentationmode) 
-available which you can use to dismiss a sheet from your own code. The BetterSheet version of this environment value is called
-`betterSheetPresentationMode`. 
+available which you can use to dismiss a sheet from your own code. The StickySheet version of this environment value is called
+`stickySheetPresentationMode`. 
 
 An example: 
 
 ```swift
 struct DetailView: View {
-    @Environment(\.betterSheetPresentationMode) var presentationMode
+    @Environment(\.stickySheetPresentationMode) var presentationMode
     
     var body: some View {
         Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
@@ -96,7 +96,7 @@ struct ContentView: View {
                 Text("Show Detail")
             }
         }
-            .betterSheet(isPresented: $showDetail) {
+            .stickySheet(isPresented: $showDetail) {
                 DetailView()
             }
     }
@@ -105,7 +105,7 @@ struct ContentView: View {
 
 ## Advanced usage
 
-So far we've only looked at the API that offers similar functionality to the default SwiftUI sheet functionality. BetterSheet however
+So far we've only looked at the API that offers similar functionality to the default SwiftUI sheet functionality. StickySheet however
 offers some more advanced possibilities for if you don't want the user to simply dismiss your sheet with a swipe gesture.
 
 For example:
@@ -126,7 +126,7 @@ struct EditView: View {
     let fruit: Fruit?
     @State var name: String
     
-    @Environment(\.betterSheetPresentationMode) var presentationMode
+    @Environment(\.stickySheetPresentationMode) var presentationMode
     
     @State var showDismissActions = false
     
@@ -178,8 +178,8 @@ struct EditView: View {
                         ]
                     )
                 }
-                .betterSheetIsModalInPresentation(isModified)
-                .onBetterSheetDidAttemptToDismiss {
+                .stickySheetIsModalInPresentation(isModified)
+                .onStickySheetDidAttemptToDismiss {
                     self.showDismissActions = true
                 }
         }
@@ -225,10 +225,10 @@ struct ContentView: View {
                 .navigationBarItems(
                     leading: Button(action: { self.addFruit = true }) { Text("Add") }
                 )
-                .betterSheet(isPresented: $addFruit) {
+                .stickySheet(isPresented: $addFruit) {
                     EditView(fruits: self.$fruits)
                 }
-                .betterSheet(item: $editFruit) { fruit in
+                .stickySheet(item: $editFruit) { fruit in
                     EditView(fruits: self.$fruits, fruit: fruit)
                 }
         }

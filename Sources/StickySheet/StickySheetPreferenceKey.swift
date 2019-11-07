@@ -1,6 +1,6 @@
 //
-//  BetterSheetPreferenceKey.swift
-//  BetterSheet
+//  StickySheetPreferenceKey.swift
+//  StickySheet
 //
 //  Created by Peter Verhage on 09/08/2019.
 //  Copyright © 2019 Peter Verhage. All rights reserved.
@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-internal struct BetterSheetPreferenceKey: PreferenceKey {
-    typealias Value = BetterSheet?
+internal struct StickySheetPreferenceKey: PreferenceKey {
+    typealias Value = StickySheet?
     
     static var defaultValue: Value = nil
     

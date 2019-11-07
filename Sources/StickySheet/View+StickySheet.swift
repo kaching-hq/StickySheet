@@ -1,6 +1,6 @@
 //
-//  View+BetterSheet.swift
-//  BetterSheet
+//  View+StickySheet.swift
+//  StickySheet
 //
 //  Created by Peter Verhage on 02/08/2019.
 //  Copyright © 2019 Peter Verhage. All rights reserved.
@@ -8,13 +8,13 @@
 
 import SwiftUI
 
-private struct BetterSheetIsPresented<Sheet>: ViewModifier where Sheet: View {
+private struct StickySheetIsPresented<Sheet>: ViewModifier where Sheet: View {
     @Binding var isPresented: Bool
     let onDismiss: (() -> Void)?
     let content: () -> Sheet
     
-    func sheet() -> BetterSheet {
-        BetterSheet(
+    func sheet() -> StickySheet {
+        StickySheet(
             content: { AnyView(self.content()) },
             onDismiss: onDismiss,
             shouldDismiss: { !self.isPresented },
@@ -29,20 +29,20 @@ private struct BetterSheetIsPresented<Sheet>: ViewModifier where Sheet: View {
         content.background(
             EmptyView()
                 .preference(
-                    key: BetterSheetPreferenceKey.self,
+                    key: StickySheetPreferenceKey.self,
                     value: isPresented ? sheet() : nil
                 )
         )
     }
 }
 
-private struct BetterSheetItem<Item, Sheet>: ViewModifier where Item: Identifiable, Sheet: View {
+private struct StickySheetItem<Item, Sheet>: ViewModifier where Item: Identifiable, Sheet: View {
     @Binding var item: Item?
     let onDismiss: (() -> Void)?
     let content: (Item) -> Sheet
     
-    func sheet(for item: Item) -> BetterSheet {
-        BetterSheet(
+    func sheet(for item: Item) -> StickySheet {
+        StickySheet(
             content: { AnyView(self.content(item)) },
             onDismiss: onDismiss,
             shouldDismiss: { self.item?.id != item.id },
@@ -57,7 +57,7 @@ private struct BetterSheetItem<Item, Sheet>: ViewModifier where Item: Identifiab
         content.background(
             EmptyView()
                 .preference(
-                    key: BetterSheetPreferenceKey.self,
+                    key: StickySheetPreferenceKey.self,
                     value: self.item != nil ? self.sheet(for: self.item!) : nil
                 )
         )
@@ -65,11 +65,11 @@ private struct BetterSheetItem<Item, Sheet>: ViewModifier where Item: Identifiab
 }
 
 public extension View {
-    func betterSheet<Content>(isPresented: Binding<Bool>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
-        modifier(BetterSheetIsPresented(isPresented: isPresented, onDismiss: onDismiss, content: content))
+    func stickySheet<Content>(isPresented: Binding<Bool>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
+        modifier(StickySheetIsPresented(isPresented: isPresented, onDismiss: onDismiss, content: content))
     }
     
-    func betterSheet<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item: Identifiable, Content: View {
-        modifier(BetterSheetItem(item: item, onDismiss: onDismiss, content: content))
+    func stickySheet<Item, Content>(item: Binding<Item?>, onDismiss: (() -> Void)? = nil, @ViewBuilder content: @escaping (Item) -> Content) -> some View where Item: Identifiable, Content: View {
+        modifier(StickySheetItem(item: item, onDismiss: onDismiss, content: content))
     }
 }

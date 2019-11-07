@@ -4,16 +4,16 @@
 import PackageDescription
 
 let package = Package(
-    name: "BetterSheet",
+    name: "StickySheet",
     platforms: [
         .iOS(.v13)
     ],
     products: [
-        .library(name: "BetterSheet", targets: ["BetterSheet"]),
+        .library(name: "StickySheet", targets: ["StickySheet"]),
     ],
     dependencies: [],
     targets: [
-        .target(name: "BetterSheet", dependencies: []),
-        .testTarget(name: "BetterSheetTests", dependencies: ["BetterSheet"]),
+        .target(name: "StickySheet", dependencies: []),
+        .testTarget(name: "StickySheetTests", dependencies: ["StickySheet"]),
     ]
 )
